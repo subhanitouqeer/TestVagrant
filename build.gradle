@@ -1,0 +1,66 @@
+defaultTasks 'clean','test','aggregate'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+group 'org.serenity.EJ'                       //set according to your group name
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    project.ext {
+        serenityVersion = '2.3.12'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath('net.serenity-bdd:serenity-gradle-plugin:' + serenityVersion)
+    }
+}
+
+sourceCompatibility = 1.8                        //add according to your project SDK
+targetCompatibility = 1.8                        //add according to your project SDK
+
+ext {
+    slf4jVersion = '2.0.3'
+    serenityCoreVersion = '3.3.4'
+    junitVersion = '4.13.2'
+    assertJVersion = '3.23.1'
+    logbackVersion = '1.2.3'
+    restAssuredVersion = '5.2.0'
+    jsonVersion = '20220924'
+}
+
+dependencies {
+    testImplementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-junit:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-screenplay-rest:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-rest-assured:${serenityCoreVersion}",
+            "io.rest-assured:rest-assured:${restAssuredVersion}",
+            "org.json:json:${jsonVersion}",
+            "junit:junit:${junitVersion}",
+            "org.assertj:assertj-core:${assertJVersion}",
+            "org.slf4j:slf4j-simple:${slf4jVersion}",
+            "net.serenity-bdd:serenity-cucumber:${serenityCoreVersion}",
+            "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.4",
+            "commons-io:commons-io:2.11.0"
+}
+
+test {
+    filter {
+        //Cucumber tests
+        includeTestsMatching "*runner*"                   //Set to your Cucumber Runner Package
+    }
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+}
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)

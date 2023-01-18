@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="This file wil test the validations on the sample json response provided" skipped="0" tests="1" time="0.22" timestamp="2023-01-18 04:22:32"><testcase name="Validating if the team has only 4 foreign players and 1 wicket-keeper"/></testsuite>

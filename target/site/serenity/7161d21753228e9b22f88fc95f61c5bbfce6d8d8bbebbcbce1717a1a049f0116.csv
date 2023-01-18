@@ -1,0 +1,2 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"This file wil test the validations on the sample json response provided","Validating if the team has only 4 foreign players and 1 wicket-keeper","SUCCESS","2023-01-18T16:22:32.996+05:30[Asia/Calcutta]","0.0","0.22"
